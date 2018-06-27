@@ -7,7 +7,9 @@ class Locations extends Component {
   state = {
     locations: []
   }
-
+  handleMouseEnter(e) {
+    console.log(e.target.id)
+  }
   componentDidMount() {
     axios.get('http://127.0.0.1:5000/locations')
       .then(response => {
@@ -30,7 +32,7 @@ class Locations extends Component {
           containerElement={<div style={{ height: `400px` }} />}
           mapElement={<div style={{ height: `100%` }} />}
         />
-        <LocationList pinLocations={this.state.locations} />
+        <LocationList handleMouseEnter={this.handleMouseEnter} pinLocations={this.state.locations} />
      </div>
     );
   }
