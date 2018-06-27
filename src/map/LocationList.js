@@ -1,7 +1,12 @@
 import React from 'react';
+import './LocationList.css'
+const LocationList = (props) =>
+<div className='grid-container'>
+    {props.pinLocations.map((pin)=> <li className='grid-item'> {pin.data.name} </li>)}
+</div>
 
-const LocationList = (props) => props.pinLocations.map(
-    (pin)=> <li> {pin.data.name} </li>
-    )
+
+
+
 
 export default LocationList
