@@ -8,9 +8,24 @@
   grid-column-gap: 10px;
 }
 .grid-item {
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  min-height: 100%;
+  position: relative;
+  border: 1px solid;
+  box-sizing: border-box;
+}
+
+.grid-item::before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+
+.grid-item .content{
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  width: 100%;
 }
 .grid-item img {
+    padding-left: 15%;
     max-width: 70%;
 }
