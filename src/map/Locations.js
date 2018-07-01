@@ -11,9 +11,9 @@ class Locations extends Component {
     console.log(e.target.id)
   }
   componentDidMount() {
-    axios.get('http://127.0.0.1:5000/locations')
+    axios.get('http://127.0.0.1:8000')
       .then(response => {
-        const locations = response.data.locations
+        const locations = response.data
         this.setState({ locations })
       })
       .catch(function (error) {

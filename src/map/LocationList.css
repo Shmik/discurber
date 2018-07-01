@@ -1,6 +1,6 @@
 .grid-container {
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: repeat(5, 1fr);
   margin-left: 100px;
   margin-right: 100px;
   margin-top: 20px;
@@ -9,5 +9,8 @@
 }
 .grid-item {
   border: 1px solid rgba(0, 0, 0, 0.8);
-  padding-bottom: 50%;
+  min-height: 100%;
+}
+.grid-item img {
+    max-width: 70%;
 }
