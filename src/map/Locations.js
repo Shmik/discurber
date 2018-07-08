@@ -13,6 +13,7 @@ class Locations extends Component {
   constructor(props){
     super(props);
     this.setNewPin = this.setNewPin.bind(this)
+    this.clearNewPin = this.clearNewPin.bind(this)
   }
   handleMouseEnter(e) {
     console.log(e.target.id)
@@ -33,7 +34,9 @@ class Locations extends Component {
     let lng = location.lng()
     this.setState({newPin: {exists: true, lat: lat, lng: lng}})
     this.setState({center: {lat: lat, lng: lng}})
-    console.log({exists: true, lat: lat, lng: lng})
+  }
+  clearNewPin(){
+    this.setState({newPin: {exists: false, lat: '', lng: ''}})
   }
   render() {
     return (
@@ -47,8 +50,13 @@ class Locations extends Component {
           containerElement={<div style={{ height: `400px` }} />}
           mapElement={<div style={{ height: `100%` }} />}
         />
-        <PinForm setNewPin={this.setNewPin}/>
-
+        <LocationList
+          pinLocations={this.state.locations}
+          handleMouseEnter={this.handleMouseEnter} />
+        <PinForm
+          setNewPin={this.setNewPin}
+          clearNewPin={this.state.clearNewPin}
+          />
      </div>
     );
   }
