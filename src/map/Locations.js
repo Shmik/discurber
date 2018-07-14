@@ -6,17 +6,29 @@ import axios from 'axios';
 
 class Locations extends Component {
   state = {
+    showMap: true,
+    showLocationList: true,
+    showForm: true,
     locations: [],
     newPin: {exists: false},
-    center: { lat: -33.858669, lng: 151.204593 }
+    center: { lat: -33.858669, lng: 151.204593 },
+    activePin: ""
   }
+
+  green_icon='http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+
   constructor(props){
     super(props);
     this.setNewPin = this.setNewPin.bind(this)
     this.clearNewPin = this.clearNewPin.bind(this)
+    this.handleToggle = this.handleToggle.bind(this)
+    this.handleMouseEnter = this.handleMouseEnter.bind(this)
   }
   handleMouseEnter(e) {
-    console.log(e.target.id)
+    console.log(e.currentTarget.id)
+    this.setState({
+      activePin: e.currentTarget.id
+    })
   }
   componentDidMount() {
     axios.get('http://127.0.0.1:8000')
@@ -38,25 +50,37 @@ class Locations extends Component {
   clearNewPin(){
     this.setState({newPin: {exists: false, lat: '', lng: ''}})
   }
+  handleToggle(event) {
+    const target = event.target;
+    const name = target.name;
+    this.setState({
+      [name]: !this.state[name]
+    });
+  }
+
   render() {
     return (
       <div>
-        <Map
+        <button name='showMap' onClick={this.handleToggle}>Toggle Map</button>
+        <button name='showLocationList' onClick={this.handleToggle}>Toggle LocationList</button>
+        <button name='showForm' onClick={this.handleToggle}>Toggle Form</button>
+        {this.state.showMap && <Map
           center = {this.state.center}
           newPin = {this.state.newPin}
+          activePin = {this.state.activePin}
           pinLocations={this.state.locations}
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAuujf3qwBlQG1WIbQNqGbpjJdgjKFdx4"
           loadingElement={<div style={{ height: `100%` }} />}
           containerElement={<div style={{ height: `400px` }} />}
           mapElement={<div style={{ height: `100%` }} />}
-        />
-        <LocationList
+        />}
+        {this.state.showLocationList && <LocationList
           pinLocations={this.state.locations}
-          handleMouseEnter={this.handleMouseEnter} />
-        <PinForm
+          handleMouseEnter={this.handleMouseEnter} />}
+        {this.state.showForm && <PinForm
           setNewPin={this.setNewPin}
           clearNewPin={this.state.clearNewPin}
-          />
+          />}
      </div>
     );
   }
