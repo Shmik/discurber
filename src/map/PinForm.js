@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import './PinForm.css'
 
 class PinForm extends React.Component {
 
@@ -38,7 +39,6 @@ class PinForm extends React.Component {
   }
 
   geocodeAddress(geocoder, resultsMap) {
-    let self = this
     let address = this.state.address
     geocoder.geocode({'address': address}, this.validate_address);
   }
@@ -99,31 +99,35 @@ class PinForm extends React.Component {
   }
   handlePictureUpload = (event) => {
     this.setState({
-      pictures: [...this.state.pictures, event.target.files[0]]
-    })
+    pictures: [...this.state.pictures, event.target.files[0]]
+  })
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className='pin_form' onSubmit={this.handleSubmit}>
         <label>
           Pin Description
-          <input
-            name="description"
-            type="text"
-            onChange={this.handleInputChange} />
         </label>
-        <br />
+        <input
+          name="description"
+          type="text"
+          onChange={this.handleInputChange} />
         <label>
           Address
-          <input
-            name="address"
-            type="text"
-            value={this.state.parsedAddress}
-            onChange={this.handleInputChange} />
         </label>
-        <br />
-        <input name="pictures" id='pictures' type="file" onChange={this.handlePictureUpload}/>
-        <button id='geocode' onClick={this.handleGeocode}> Geocode </button>
+        <input
+          name="address"
+          type="text"
+          value={this.state.parsedAddress}
+          onChange={this.handleInputChange} />
+        <button id='geocode' onClick={this.handleGeocode}>Find Address</button>
+        <input
+          name="pictures"
+          id='pictures'
+          type="file"
+          ref={fileInput => this.fileInput = fileInput}
+          onChange={this.handlePictureUpload}/>
+        <button onClick={() => this.fileInput.click()}> Add pictures </button>
         <input type='submit' id='submit' value='Submit' />
       </form>
 

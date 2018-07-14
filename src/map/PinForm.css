@@ -1,0 +1,12 @@
+input[type=text]{
+    width: 30%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+input, label{
+    display: block;
+}
+input[type=file]{
+    display: none;
+}
