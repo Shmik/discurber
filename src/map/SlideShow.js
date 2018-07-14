@@ -23,7 +23,7 @@ class SlideShow extends React.Component {
     return (
       <div className='slider'>
       <span className='prev' onClick={this.scrollLeft}>&#10094;</span>
-        <img src={this.props.pictures[this.state.currentPic]} />
+        <img src={this.props.pictures[this.state.currentPic]} alt={this.props.pictures[this.state.currentPic].split('/').pop()} />
       <span className='next' onClick={this.scrollRight}>&#10095;</span>
       </div>
     );

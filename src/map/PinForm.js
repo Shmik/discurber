@@ -39,7 +39,6 @@ class PinForm extends React.Component {
   }
 
   geocodeAddress(geocoder, resultsMap) {
-    let self = this
     let address = this.state.address
     geocoder.geocode({'address': address}, this.validate_address);
   }

@@ -23,11 +23,16 @@ class Locations extends Component {
     this.clearNewPin = this.clearNewPin.bind(this)
     this.handleToggle = this.handleToggle.bind(this)
     this.handleMouseEnter = this.handleMouseEnter.bind(this)
+    this.handleMouseLeave = this.handleMouseLeave.bind(this)
   }
   handleMouseEnter(e) {
-    console.log(e.currentTarget.id)
     this.setState({
       activePin: e.currentTarget.id
+    })
+  }
+  handleMouseLeave() {
+    this.setState({
+      activePin: ''
     })
   }
   componentDidMount() {
@@ -76,7 +81,8 @@ class Locations extends Component {
         />}
         {this.state.showLocationList && <LocationList
           pinLocations={this.state.locations}
-          handleMouseEnter={this.handleMouseEnter} />}
+          handleMouseEnter={this.handleMouseEnter}
+          handleMouseLeave={this.handleMouseLeave} />}
         {this.state.showForm && <PinForm
           setNewPin={this.setNewPin}
           clearNewPin={this.state.clearNewPin}
