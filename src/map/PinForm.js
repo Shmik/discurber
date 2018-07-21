@@ -45,7 +45,6 @@ class PinForm extends React.Component {
 
   validate_address(results, status){
       if (status === 'OK') {
-        console.log(results[0])
         this.props.setNewPin(results[0].geometry.location)
         this.setState({
           formatted_address: results[0].formatted_address,
@@ -95,7 +94,6 @@ class PinForm extends React.Component {
     .catch(function (error) {
       console.log(error);
     });
-    console.log('submitted')
   }
   handlePictureUpload = (event) => {
     this.setState({
