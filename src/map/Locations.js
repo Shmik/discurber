@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import Map from './Map';
 import LocationList from './LocationList'
 import PinForm from './PinForm'
+import './Locations.css'
+import ActionButtons from './ActionButtons'
 import axios from 'axios';
 
 class Locations extends Component {
   state = {
     showMap: true,
-    showLocationList: true,
+    showLocationList: false,
     showForm: true,
     locations: [],
     newPin: {exists: false},
@@ -87,6 +89,7 @@ class Locations extends Component {
           setNewPin={this.setNewPin}
           clearNewPin={this.state.clearNewPin}
           />}
+        <ActionButtons />
      </div>
     );
   }
