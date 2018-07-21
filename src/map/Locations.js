@@ -3,7 +3,7 @@ import Map from './Map';
 import LocationList from './LocationList'
 import PinForm from './PinForm'
 import './Locations.css'
-
+import ActionButtons from './ActionButtons'
 import axios from 'axios';
 
 class Locations extends Component {
@@ -89,14 +89,7 @@ class Locations extends Component {
           setNewPin={this.setNewPin}
           clearNewPin={this.state.clearNewPin}
           />}
-        <div class="addPin">
-          <form >
-          <div className='addPinButton'><i className="fa fa-plus-square fa-3x"></i><input type="text" placeholder='Enter pin location' /></div>
-          </form>
-        </div>
-
-
-
+        <ActionButtons />
      </div>
     );
   }

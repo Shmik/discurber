@@ -1,0 +1,24 @@
+.sliding-input__inner{
+    float: right;
+}
+.sliding-input input {
+    width: 0px;
+    float: left;
+    transition: width 1s ease-in-out;
+    border:none;
+    padding-left: 0px;
+    padding-right: 0px;
+    height: 35px;
+    margin-top: 6px;
+    margin-right: -5px;
+    font-size: 100%;
+}
+.sliding-input:hover input {
+    width: 200px;
+    padding-left: 5px;
+}
+
+.sliding-input input:focus {
+    width: 200px;
+    padding-left: 5px;
+}
