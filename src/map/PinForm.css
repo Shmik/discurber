@@ -1,12 +1,50 @@
-input[type=text]{
-    width: 30%;
+.action-buttons {
+    position: absolute;
+    top: 30px;
+    left: 70%;
+    width: 25%
+}
+
+.pin_form input[type=text]{
+    width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
+    background: transparent;
 }
-input, label{
+.pin_form input, label{
     display: block;
+    margin-bottom: 10px;
 }
-input[type=file]{
+.pin_form input[type=file]{
     display: none;
+}
+.pin_form{
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    background: f2f2f2;
+    padding: 30px 30px 15px 30px;
+    border: 5px solid #53687E;
+}
+
+.pin_form input[type=text]:focus,
+{
+    border-bottom: 1px dashed black;
+}
+
+.pin_form button {
+    background: #576E86;
+    border: none;
+    padding: 8px 10px 8px 10px;
+    border-radius: 5px;
+    color: #A8BACE;
+}
+.pin_form input[type=submit]{
+    background: #576E86;
+    border: none;
+    padding: 8px 10px 8px 10px;
+    border-radius: 5px;
+    color: #A8BACE;
 }

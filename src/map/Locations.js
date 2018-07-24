@@ -3,14 +3,13 @@ import Map from './Map';
 import LocationList from './LocationList'
 import PinForm from './PinForm'
 import './Locations.css'
-import ActionButtons from './ActionButtons'
 import axios from 'axios';
 
 class Locations extends Component {
   state = {
     showMap: true,
-    showLocationList: false,
-    showForm: true,
+    showLocationList: true,
+    showForm: false,
     locations: [],
     newPin: {exists: false},
     center: { lat: -33.858669, lng: 151.204593 },
@@ -54,6 +53,11 @@ class Locations extends Component {
     this.setState({newPin: {exists: true, lat: lat, lng: lng}})
     this.setState({center: {lat: lat, lng: lng}})
   }
+  setNewCenter = (location) => {
+    let lat = location.lat()
+    let lng = location.lng()
+    this.setState({center: {lat: lat, lng: lng}})
+  }
   clearNewPin(){
     this.setState({newPin: {exists: false, lat: '', lng: ''}})
   }
@@ -68,28 +72,33 @@ class Locations extends Component {
   render() {
     return (
       <div>
-        <button name='showMap' onClick={this.handleToggle}>Toggle Map</button>
-        <button name='showLocationList' onClick={this.handleToggle}>Toggle LocationList</button>
-        <button name='showForm' onClick={this.handleToggle}>Toggle Form</button>
-        {this.state.showMap && <Map
+        <button name='showMap' style={{float:'right'}} onClick={this.handleToggle}>Toggle Map</button>
+        <button name='showLocationList' style={{float:'right'}} onClick={this.handleToggle}>Toggle LocationList</button>
+        <button name='showForm' style={{float:'right'}} onClick={this.handleToggle}>Toggle Form</button>
+        <div className='app_layout'>
+          {this.state.showLocationList && <LocationList
+          pinLocations={this.state.locations}
+          handleMouseEnter={this.handleMouseEnter}
+          handleMouseLeave={this.handleMouseLeave} />}
+          {this.state.showMap &&
+          <div className="map_outer">
+          <div className="map_inner">
+          <Map
           center = {this.state.center}
           newPin = {this.state.newPin}
           activePin = {this.state.activePin}
           pinLocations={this.state.locations}
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAuujf3qwBlQG1WIbQNqGbpjJdgjKFdx4"
           loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `400px` }} />}
+          containerElement={<div style={{ height: `800px` }} />}
           mapElement={<div style={{ height: `100%` }} />}
-        />}
-        {this.state.showLocationList && <LocationList
-          pinLocations={this.state.locations}
-          handleMouseEnter={this.handleMouseEnter}
-          handleMouseLeave={this.handleMouseLeave} />}
-        {this.state.showForm && <PinForm
-          setNewPin={this.setNewPin}
-          clearNewPin={this.state.clearNewPin}
-          />}
-        <ActionButtons />
+          /></div></div>}
+          {this.state.showForm && <PinForm
+            setNewPin={this.setNewPin}
+            setNewCenter={this.setNewCenter}
+            clearNewPin={this.state.clearNewPin}
+            />}
+        </div>
      </div>
     );
   }

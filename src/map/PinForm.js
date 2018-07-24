@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import './PinForm.css'
+import SlidingInput from './SlidingInput'
 
+import './PinForm.css'
 class PinForm extends React.Component {
 
   constructor(props) {
@@ -16,9 +17,10 @@ class PinForm extends React.Component {
       };
     this.props = props
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleGeocode = this.handleGeocode.bind(this)
-    this.geocodeAddress = this.geocodeAddress.bind(this)
-    this.validate_address = this.validate_address.bind(this)
+    this.handleGeocodeNewPin = this.handleGeocodeNewPin.bind(this)
+    this.handleGeocodeSearch = this.handleGeocodeSearch.bind(this)
+    this.displayNewPin = this.displayNewPin.bind(this)
+    this.setNewCenter = this.setNewCenter.bind(this)
   }
 
   componentDidMount(){
@@ -33,17 +35,12 @@ class PinForm extends React.Component {
       }, 100)
   };
 
-  handleGeocode(event) {
-    event.preventDefault();
-    this.geocodeAddress(this.geocoder, this.props.map)
+  handleGeocodeNewPin(event) {
+    let address = this.state.address;
+    this.geocoder.geocode({'address': address}, this.displayNewPin);
   }
 
-  geocodeAddress(geocoder, resultsMap) {
-    let address = this.state.address
-    geocoder.geocode({'address': address}, this.validate_address);
-  }
-
-  validate_address(results, status){
+  displayNewPin(results, status){
       if (status === 'OK') {
         this.props.setNewPin(results[0].geometry.location)
         this.setState({
@@ -62,6 +59,20 @@ class PinForm extends React.Component {
 
       }
   }
+
+  handleGeocodeSearch(event) {
+    let address = this.state.searchAddress;
+    this.geocoder.geocode({'address': address}, this.setNewCenter);
+  }
+
+  setNewCenter(results, status){
+    if (status === 'OK') {
+      this.props.setNewCenter(results[0].geometry.location)
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  }
+
   handleInputChange(event) {
     const target = event.target;
     const name = target.name;
@@ -82,7 +93,6 @@ class PinForm extends React.Component {
     for (const pic of this.state.pictures){
       form_data.append('pictures', pic)
     }
-    debugger
     axios.post('http://127.0.0.1:8000', form_data, {
       headers: {
         'Content-Type': 'multipart/form-data'
@@ -102,33 +112,38 @@ class PinForm extends React.Component {
   }
   render() {
     return (
-      <form className='pin_form' onSubmit={this.handleSubmit}>
-        <label>
-          Pin Description
-        </label>
-        <input
-          name="description"
-          type="text"
-          onChange={this.handleInputChange} />
-        <label>
-          Address
-        </label>
-        <input
-          name="address"
-          type="text"
-          value={this.state.parsedAddress}
-          onChange={this.handleInputChange} />
-        <button id='geocode' onClick={this.handleGeocode}>Find Address</button>
-        <input
-          name="pictures"
-          id='pictures'
-          type="file"
-          ref={fileInput => this.fileInput = fileInput}
-          onChange={this.handlePictureUpload}/>
-        <button onClick={() => this.fileInput.click()}> Add pictures </button>
-        <input type='submit' id='submit' value='Submit' />
-      </form>
-
+      <div>
+        <form className='pin_form' onSubmit={this.handleSubmit}>
+          <label> {this.state.formatted_address} </label>
+          <label> Pin Description </label>
+          <input
+            name="description"
+            type="text"
+            onChange={this.handleInputChange} />
+          <input
+            name="pictures"
+            id='pictures'
+            type="file"
+            ref={ref => this.fileInput = ref}
+            onChange={this.handlePictureUpload}/>
+          <button type='button' onClick={() => this.fileInput.click()}> Add pictures </button>
+          <ul>{this.state.pictures.map((file, index) => <li key={index}>{file.name}</li>)}</ul>
+          <input type='submit' id='submit' value='Submit' />
+        </form>
+        {/* <div className="action-buttons">
+          <SlidingInput
+            fa_icon='plus-square'
+            value={this.state.parsedAddress}
+            onChange={this.handleInputChange}
+            handleEnter={this.handleGeocodeNewPin}
+            name='address' />
+          <SlidingInput
+            fa_icon='search'
+            onChange={this.handleInputChange}
+            handleEnter={this.handleGeocodeSearch}
+            name='searchAddress' />
+        </div> */}
+      </div>
     );
   }
 }

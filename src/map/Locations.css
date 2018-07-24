@@ -1,7 +1,8 @@
-.action-buttons {
-    position: absolute;
-    top: 30px;
-    left: 70%;
-    width: 25%
+.app_layout{
+    display: grid;
+    grid-template-columns: 66% auto;
 }
-
+.map_inner{
+    position: fixed;
+    width: 100%;
+}
