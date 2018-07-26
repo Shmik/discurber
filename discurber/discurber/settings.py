@@ -25,7 +25,7 @@ SECRET_KEY = '5s127^5e)ta0)#5pg1e%_%7hf_)y84sp%1$z=+=b%7cp(y#5w#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['.discurber.com', '45.56.95.197', 'li897-197.members.linode.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
