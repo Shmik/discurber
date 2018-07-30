@@ -37,7 +37,7 @@ class Locations extends Component {
     })
   }
   componentDidMount() {
-    axios.get('http://127.0.0.1:8000')
+    axios.get('/api/')
       .then(response => {
         const locations = response.data
         this.setState({ locations })
