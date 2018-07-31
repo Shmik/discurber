@@ -1,8 +1,30 @@
 .app_layout{
     display: grid;
+    grid-template-rows: 70px auto;
     grid-template-columns: 66% auto;
 }
 .map_inner{
     position: fixed;
     width: 100%;
+}
+.nav_bar__outer          {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    height: 100%;
+    z-index: 2;
+}
+
+.nav_bar__inner{
+    max-height:70px;
+    height: 70px;
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    background-color: white;
+}
+.nav_bar__inner img {
+    height: 40px;
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-bottom: 15px;
 }

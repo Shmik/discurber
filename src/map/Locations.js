@@ -72,10 +72,15 @@ class Locations extends Component {
   render() {
     return (
       <div>
-        <button name='showMap' style={{float:'right'}} onClick={this.handleToggle}>Toggle Map</button>
-        <button name='showLocationList' style={{float:'right'}} onClick={this.handleToggle}>Toggle LocationList</button>
-        <button name='showForm' style={{float:'right'}} onClick={this.handleToggle}>Toggle Form</button>
         <div className='app_layout'>
+          <div className='nav_bar__outer'>
+            <div className='nav_bar__inner'>
+            <img src='/Logo.png' />
+            <button name='showMap' style={{float:'right'}} onClick={this.handleToggle}>Toggle Map</button>
+            <button name='showLocationList' style={{float:'right'}} onClick={this.handleToggle}>Toggle LocationList</button>
+            <button name='showForm' style={{float:'right'}} onClick={this.handleToggle}>Toggle Form</button>
+            </div>
+          </div>
           {this.state.showLocationList && <LocationList
           pinLocations={this.state.locations}
           handleMouseEnter={this.handleMouseEnter}

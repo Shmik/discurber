@@ -1,3 +1,7 @@
+.location_list{
+  background-color: lightgray;
+  z-index: 1;
+}
 .grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -13,8 +17,8 @@
   content: '';
   display: block;
   padding-top: 100%;
-  background-color: grey;
   border-radius: 20px;
+  background-color: whitesmoke;
 }
 
 .grid-item .content{
