@@ -1,7 +1,7 @@
 .app_layout{
     display: grid;
     grid-template-rows: 70px auto;
-    grid-template-columns: 66% auto;
+    grid-template-columns: 60% auto;
 }
 .map_inner{
     position: fixed;

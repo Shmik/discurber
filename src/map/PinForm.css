@@ -1,8 +1,9 @@
 .action-buttons {
-    position: absolute;
-    top: 30px;
+    position: fixed;
+    top: 10px;
     left: 70%;
-    width: 25%
+    width: 500px;
+    z-index: 4;
 }
 
 .pin_form input[type=text]{
@@ -20,6 +21,7 @@
     display: none;
 }
 .pin_form{
+    margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
     width: 30%;
@@ -47,4 +49,7 @@
     padding: 8px 10px 8px 10px;
     border-radius: 5px;
     color: #A8BACE;
+}
+.close{
+    float: right;
 }

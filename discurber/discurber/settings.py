@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['.discurber.com', '45.56.95.197', 'li897-197.members.linode.com
 
 INSTALLED_APPS = [
     'pins.apps.PinsConfig',
+    'django_filters',
     'corsheaders',
     'django_extensions',
     'rest_framework',
@@ -134,7 +135,10 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 REST_FRAMEWORK = {
-    'COERCE_DECIMAL_TO_STRING': False
+    'COERCE_DECIMAL_TO_STRING': False,
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
+    'DEFAULT_AUTHENTICATION_CLASSES': [],
+    'DEFAULT_PERMISSION_CLASSES': [],
 }
 
 try:

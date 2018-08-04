@@ -1,0 +1,7 @@
+.filters{
+    display: grid;
+    margin-left: 100px;
+    margin-right: 100px;
+    grid-template-columns: 31% 31% 31% auto;
+    grid-gap: 10px;
+}

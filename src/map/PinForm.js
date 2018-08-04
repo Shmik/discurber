@@ -13,7 +13,8 @@ class PinForm extends React.Component {
         formatted_address:'',
         lat: '',
         lng: '',
-        pictures: []
+        pictures: [],
+        categories:[]
       };
     this.props = props
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -21,6 +22,7 @@ class PinForm extends React.Component {
     this.handleGeocodeSearch = this.handleGeocodeSearch.bind(this)
     this.displayNewPin = this.displayNewPin.bind(this)
     this.setNewCenter = this.setNewCenter.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount(){
@@ -38,6 +40,7 @@ class PinForm extends React.Component {
   handleGeocodeNewPin(event) {
     let address = this.state.address;
     this.geocoder.geocode({'address': address}, this.displayNewPin);
+    this.props.toggleShowForm(true)
   }
 
   displayNewPin(results, status){
@@ -82,6 +85,12 @@ class PinForm extends React.Component {
       [name]: value
     });
   }
+
+  handleMultipleSelect = (event) => {
+    this.setState({
+      [event.target.name]: [...event.target.options].filter(options => options.selected).map(options => options  .value)
+    });
+  }
   handleSubmit = (event) => {
     event.preventDefault()
     let form_data = new FormData()
@@ -93,13 +102,18 @@ class PinForm extends React.Component {
     for (const pic of this.state.pictures){
       form_data.append('pictures', pic)
     }
-    axios.post('http://127.0.0.1:8000', form_data, {
+    for (const category of this.state.categories){
+      form_data.append('categories', category)
+    }
+    let self = this
+    axios.post('/api/', form_data, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     })
-    .then(function (response) {
-      console.log(response);
+    .then((result)=> {
+      self.props.fetchData();
+      this.props.toggleShowForm(false);
     })
     .catch(function (error) {
       console.log(error);
@@ -113,7 +127,9 @@ class PinForm extends React.Component {
   render() {
     return (
       <div>
+        {this.props.showForm &&
         <form className='pin_form' onSubmit={this.handleSubmit}>
+          <i className='fa fa-times close' onClick={() => this.props.toggleShowForm(false)} />
           <label> {this.state.formatted_address} </label>
           <label> Pin Description </label>
           <input
@@ -126,11 +142,22 @@ class PinForm extends React.Component {
             type="file"
             ref={ref => this.fileInput = ref}
             onChange={this.handlePictureUpload}/>
+          <label> Categories </label>
+          <select multiple name='categories' value={this.state.categories} onChange={this.handleMultipleSelect}>
+            <option value='Chairs'>Chairs</option>
+            <option value='Tables'>Tables</option>
+            <option value='Tools'>Tools</option>
+            <option value='Games'>Games</option>
+            <option value='Kitchen'>Kitchen</option>
+            <option value='Electronics'>Electronics</option>
+          </select>
+          <br />
           <button type='button' onClick={() => this.fileInput.click()}> Add pictures </button>
           <ul>{this.state.pictures.map((file, index) => <li key={index}>{file.name}</li>)}</ul>
           <input type='submit' id='submit' value='Submit' />
         </form>
-        {/* <div className="action-buttons">
+        }
+        <div className="action-buttons">
           <SlidingInput
             fa_icon='plus-square'
             value={this.state.parsedAddress}
@@ -142,7 +169,7 @@ class PinForm extends React.Component {
             onChange={this.handleInputChange}
             handleEnter={this.handleGeocodeSearch}
             name='searchAddress' />
-        </div> */}
+        </div>
       </div>
     );
   }

@@ -3,6 +3,10 @@ from django.conf import settings
 from pins.models import Category
 
 class Pin(models.Model):
+
+    class Meta:
+        ordering = ['-created']
+
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
