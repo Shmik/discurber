@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-
+from pins.models import Category
 
 class Pin(models.Model):
     author = models.ForeignKey(
@@ -12,3 +12,7 @@ class Pin(models.Model):
     formatted_address = models.CharField(max_length=150)
     lat = models.DecimalField(max_digits=9, decimal_places=6)
     lng = models.DecimalField(max_digits=9, decimal_places=6)
+    categories = models.ManyToManyField(Category, related_query_name='pins')
+
+    def __str__(self):
+        return 'Pin: {}, {}'.format(self.id, self.description)
