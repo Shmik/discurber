@@ -8,7 +8,7 @@ const LocationList = (props) =>
         {props.pinLocations.map((pin)=>
             <div className='grid-item' key={pin.id} id={pin.id} onMouseEnter={props.handleMouseEnter} onMouseLeave={props.handleMouseLeave}>
                 <div className='content'>
-                    {pin.pictures.length>0 && <SlideShow pictures={pin.pictures}/>}
+                    <SlideShow pictures={pin.pictures}/>
                     {pin.categories.map((category, index)=><div key={index}>{category}</div>)}
                     <p>{pin.description}</p>
                 </div>

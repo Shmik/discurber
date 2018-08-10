@@ -1,5 +1,5 @@
 .location_list{
-  background-color: lightgray;
+  background-color: #F2F2F2;
   z-index: 1;
 }
 .grid-container {
@@ -18,8 +18,8 @@
   display: block;
   padding-top: 100%;
   border-radius: 20px;
-  background-color: whitesmoke;
-}
+  background-color: #ffffff;
+  border:1px solid #e1e1e1;}
 
 .grid-item .content{
   position: absolute;

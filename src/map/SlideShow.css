@@ -13,11 +13,17 @@
 }
 .slider{
   height: 50%;
+  border-bottom:  1px solid #cccccc
+}
+.img_wrapper{
+  height: 100%;
+  width: 100%;
 }
 .slider img {
   height: 100%;
   width: 100%;
-  border-radius: 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 /* Position the "next button" to the right */
 .next {

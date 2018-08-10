@@ -19,12 +19,35 @@ class SlideShow extends React.Component {
     }));
   }
 
+
+  renderSlide = () =>
+    <div className='img_wrapper'>
+      <span className='prev' onClick={this.scrollLeft}>&#10094;</span>
+        <img src={this.props.pictures[this.state.currentPic]}  alt="alternative" />
+       <span className='next' onClick={this.scrollRight}>&#10095;</span>
+    </div>
+
+  renderSingleImage = () => <div className='img_wrapper'>
+                              <img src={this.props.pictures[this.state.currentPic]}  alt="alternative" />
+                            </div>
+
+  renderPlaceHolder = () => <div className='img_wrapper'>
+                              <img src='/placeholder.jpg'  alt="alternative" />
+                            </div>
+
+  renderImage = () => {
+    if (this.props.pictures.length === 0) {
+      return this.renderPlaceHolder()
+    } else if (this.props.pictures.length === 1) {
+      return this.renderSingleImage()
+    }
+    return this.renderSlide()
+  }
+
   render() {
     return (
       <div className='slider'>
-      <span className='prev' onClick={this.scrollLeft}>&#10094;</span>
-        <img src={this.props.pictures[this.state.currentPic]}  alt="alternative" />
-      <span className='next' onClick={this.scrollRight}>&#10095;</span>
+        {this.renderImage()}
       </div>
     );
   }

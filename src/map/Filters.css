@@ -1,4 +1,8 @@
-.filters{
+.filters__outer{
+    background-color: #F2F2F2;
+    margin-top: 20px;
+}
+.filters__inner{
     display: grid;
     margin-left: 100px;
     margin-right: 100px;
