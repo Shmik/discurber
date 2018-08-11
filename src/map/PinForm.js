@@ -19,34 +19,19 @@ class PinForm extends React.Component {
     this.props = props
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleGeocodeNewPin = this.handleGeocodeNewPin.bind(this)
-    this.handleGeocodeSearch = this.handleGeocodeSearch.bind(this)
     this.displayNewPin = this.displayNewPin.bind(this)
-    this.setNewCenter = this.setNewCenter.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentDidMount(){
-    let self = this
-    self.geocoder = null
-    let map_getter =  setInterval(
-      function(){
-       if (window.google != null){
-          self.geocoder = new window.google.maps.Geocoder();
-          clearInterval(map_getter);
-       }
-      }, 100)
-  };
-
   handleGeocodeNewPin(event) {
     let address = this.state.address;
-    this.geocoder.geocode({'address': address}, this.displayNewPin);
+    this.props.geocoder.geocode({'address': address}, this.displayNewPin);
     this.props.toggleShowForm(true)
   }
 
   displayNewPin(results, status){
       if (status === 'OK') {
         this.props.setNewPin(results[0].geometry.location)
-        debugger
         this.setState({
           formatted_address: results[0].formatted_address,
           lat: results[0].geometry.location.lat().toFixed(6),
@@ -66,18 +51,8 @@ class PinForm extends React.Component {
 
       }
   }
-
-  handleGeocodeSearch(event) {
-    let address = this.state.searchAddress;
-    this.geocoder.geocode({'address': address}, this.setNewCenter);
-  }
-
-  setNewCenter(results, status){
-    if (status === 'OK') {
-      this.props.setNewCenter(results[0].geometry.location)
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
+  handleSearch = () => {
+    this.props.handleGeocodeSearch(this.state.searchAddress)
   }
 
   handleInputChange(event) {
@@ -117,6 +92,7 @@ class PinForm extends React.Component {
     })
     .then((result)=> {
       self.props.fetchData();
+      this.props.clearNewPin()
       this.props.toggleShowForm(false);
     })
     .catch(function (error) {
@@ -171,7 +147,7 @@ class PinForm extends React.Component {
           <SlidingInput
             fa_icon='search'
             onChange={this.handleInputChange}
-            handleEnter={this.handleGeocodeSearch}
+            handleEnter={this.handleSearch}
             name='searchAddress' />
         </div>
       </div>

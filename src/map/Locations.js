@@ -15,7 +15,8 @@ class Locations extends Component {
     newPin: {exists: false},
     center: { lat: -33.858669, lng: 151.204593 },
     activePin: '',
-    filterString: ''
+    filterString: '',
+    geocoder: null
   }
 
   green_icon='http://maps.google.com/mapfiles/ms/icons/green-dot.png'
@@ -30,20 +31,10 @@ class Locations extends Component {
     this.fetchData = this.fetchData.bind(this)
     this.setFilters = this.setFilters.bind(this)
   }
-  handleMouseEnter(e) {
-    this.setState({
-      activePin: e.currentTarget.id
-    })
-  }
-  handleMouseLeave() {
-    this.setState({
-      activePin: ''
-    })
-  }
 
   fetchData() {
     axios.get('/api/',
-      {
+    {
       params: this.state.filters
     })
     .then(response => {
@@ -55,17 +46,49 @@ class Locations extends Component {
     });
   }
   componentDidMount() {
-    this.fetchData()
+    let self = this
+    let map_getter =  setInterval(
+      function(){
+        if (window.google != null){
+          self.setState({
+            google: window.google,
+            geocoder: new window.google.maps.Geocoder()
+          })
+          clearInterval(map_getter);
+        }
+      }, 100)
+      this.fetchData()
   }
-  setNewPin(location){
-    let lat = location.lat()
-    let lng = location.lng()
-    this.setState({newPin: {exists: true, lat: lat, lng: lng}})
-    this.setState({center: {lat: lat, lng: lng}})
+  handleMouseEnter(e) {
+    this.setState({
+      activePin: e.currentTarget.id
+    })
+  }
+  handleMouseLeave() {
+    this.setState({
+      activePin: ''
+    })
+  }
+  // GEOCODING
+  handleGeocodeSearch(address) {
+    this.geocoder.geocode({'address': address}, (results, status)=>{
+      if (status === 'OK') {
+        this.setNewCenter(results[0].geometry.location)
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
   }
   setNewCenter = (location) => {
     let lat = location.lat()
     let lng = location.lng()
+    this.setState({center: {lat: lat, lng: lng}})
+  }
+
+  setNewPin(location){
+    let lat = location.lat()
+    let lng = location.lng()
+    this.setState({newPin: {exists: true, lat: lat, lng: lng}})
     this.setState({center: {lat: lat, lng: lng}})
   }
   clearNewPin(){
@@ -108,7 +131,11 @@ class Locations extends Component {
             </div>
           </div>
             <div className='left_outer'>
-            <Filters setFilters={this.setFilters}/>
+            <Filters
+              geocoder = {this.state.geocoder}
+              setFilters={this.setFilters}
+              setNewCenter={this.setNewCenter}
+            />
             {
               this.state.showLocationList &&
               <LocationList
@@ -117,12 +144,14 @@ class Locations extends Component {
               handleMouseLeave={this.handleMouseLeave} />
             }
             <PinForm
+            handleGeocodeSearch = {this.handleGeocodeSearch}
+            geocoder = {this.state.geocoder}
             fetchData={this.fetchData}
             toggleShowForm={this.toggleShowForm}
             showForm={this.state.showForm}
             setNewPin={this.setNewPin}
             setNewCenter={this.setNewCenter}
-            clearNewPin={this.state.clearNewPin}
+            clearNewPin={this.clearNewPin}
             />
             </div>
           {this.state.showMap &&

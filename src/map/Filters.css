@@ -11,14 +11,29 @@
     grid-gap: 10px;
 }
 select {
+    padding-left: 5px;
     background-color: white;
     border: 1px solid #e1e1e1;
 }
 input {
+    padding-left: 10px;
     border: 1px solid #e1e1e1;
 }
 button{
     background-color: #29ABE2;
     border: 0px;
     color: white;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: black;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: black;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: black;
 }

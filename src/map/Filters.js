@@ -5,8 +5,11 @@ class Filters extends Component{
     constructor(){
         super()
         this.state = {
+          address: '',
           categories: '',
           description: '',
+          lat: '',
+          lng: ''
         }
     }
     handleInputChange = (event) =>{
@@ -24,13 +27,31 @@ class Filters extends Component{
         this.state
       )
     }
+    handleSubmit = () => {
+      let address = this.state.address;
+      this.props.geocoder.geocode({'address': address}, (results, status)=> {
+        if (status === 'OK') {
+          this.props.setNewCenter(results[0].geometry.location)
+          this.setState({
+            lat: results[0].geometry.location.lat().toFixed(6),
+            lng: results[0].geometry.location.lng().toFixed(6),
+            address: results[0].formatted_address,
+          }, this.setFilters())
+        } else {
+          this.setState({
+            lat: '',
+            lng: '',
+          }, this.setFilters())
+        }
+      });
+    }
 
     render(){
       return (
         <div className='filters__outer'>
           <div className='filters__inner'>
-          <input name='location' onChange={this.handleInputChange} placeholder='Location' />
-          <input name='description' onChange={this.handleInputChange} placeholder='Desctription' />
+          <input name='address' value={this.state.address} onChange={this.handleInputChange} placeholder='Location' />
+          <input name='description' value={this.state.description} onChange={this.handleInputChange} placeholder='Desctription' />
           <select name='categories' value={this.state.categories} onChange={this.handleInputChange}>
             <option value='' disabled>Category </option>
             <option value='chairs'>Chairs</option>
@@ -40,7 +61,7 @@ class Filters extends Component{
             <option value='kitchen'>Kitchen</option>
             <option value='electronics'>Electronics</option>
           </select>
-          <button  onClick={this.setFilters}>GO!</button>
+          <button  onClick={this.handleSubmit}>GO!</button>
           </div>
         </div>
       );
