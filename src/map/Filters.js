@@ -29,6 +29,8 @@ class Filters extends Component{
       return (
         <div className='filters__outer'>
           <div className='filters__inner'>
+          <input name='location' onChange={this.handleInputChange} placeholder='Location' />
+          <input name='description' onChange={this.handleInputChange} placeholder='Desctription' />
           <select name='categories' value={this.state.categories} onChange={this.handleInputChange}>
             <option value='' disabled>Category </option>
             <option value='chairs'>Chairs</option>
@@ -38,8 +40,7 @@ class Filters extends Component{
             <option value='kitchen'>Kitchen</option>
             <option value='electronics'>Electronics</option>
           </select>
-          <input name='description' onChange={this.handleInputChange} placeholder='Desctription' />
-          <button  onClick={this.setFilters}>GO</button>
+          <button  onClick={this.setFilters}>GO!</button>
           </div>
         </div>
       );

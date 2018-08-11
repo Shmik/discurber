@@ -3,9 +3,22 @@
     margin-top: 20px;
 }
 .filters__inner{
+    height: 30px;
     display: grid;
     margin-left: 100px;
     margin-right: 100px;
     grid-template-columns: 31% 31% 31% auto;
     grid-gap: 10px;
+}
+select {
+    background-color: white;
+    border: 1px solid #e1e1e1;
+}
+input {
+    border: 1px solid #e1e1e1;
+}
+button{
+    background-color: #29ABE2;
+    border: 0px;
+    color: white;
 }

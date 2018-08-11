@@ -5,7 +5,7 @@ from pins.models import Category
 class Pin(models.Model):
 
     class Meta:
-        ordering = ['-created']
+        ordering =  ['-created']
 
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -17,6 +17,9 @@ class Pin(models.Model):
     lat = models.DecimalField(max_digits=9, decimal_places=6)
     lng = models.DecimalField(max_digits=9, decimal_places=6)
     categories = models.ManyToManyField(Category, related_query_name='pins')
+    suburb = models.CharField(max_length=63,blank=True)
+    state = models.CharField(max_length=31, blank=True)
+    postcode = models.CharField(max_length=6, blank=True)
 
     def __str__(self):
         return 'Pin: {}, {}'.format(self.id, self.description)

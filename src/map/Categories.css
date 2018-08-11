@@ -1,0 +1,14 @@
+.categoriesList{
+    margin: 10px;
+    display: grid;
+    grid-gap: 8px;
+    grid-template-columns: auto auto auto auto;
+}
+.categoryItem{
+    background-color: #ebebeb;
+    color: #41b3e4;
+    text-align: center;
+    padding-top: 2px;
+    padding-bottom: -2px;
+    overflow: hidden;
+}

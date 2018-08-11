@@ -12,14 +12,14 @@
   grid-column-gap: 10px;
 }
 .grid-item {
+  height: 350px;
   position: relative;
   box-sizing: border-box;
   content: '';
   display: block;
-  padding-top: 100%;
   border-radius: 20px;
   background-color: #ffffff;
-  border:1px solid #e1e1e1;}
+  border: 2px solid #e1e1e1;}
 
 .grid-item .content{
   position: absolute;

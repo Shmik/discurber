@@ -8,7 +8,19 @@ class PinSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Pin
-        fields = ('id', 'created', 'description', 'formatted_address', 'lat', 'lng', 'pictures', 'categories')
+        fields = (
+            'id',
+            'created',
+            'description',
+            'formatted_address',
+            'suburb',
+            'state',
+            'postcode',
+            'lat',
+            'lng',
+            'pictures',
+            'categories',
+            )
 
     def get_pictures(self, obj):
         request = self.context.get('request')

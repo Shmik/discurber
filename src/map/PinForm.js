@@ -46,10 +46,14 @@ class PinForm extends React.Component {
   displayNewPin(results, status){
       if (status === 'OK') {
         this.props.setNewPin(results[0].geometry.location)
+        debugger
         this.setState({
           formatted_address: results[0].formatted_address,
           lat: results[0].geometry.location.lat().toFixed(6),
-          lng: results[0].geometry.location.lng().toFixed(6)
+          lng: results[0].geometry.location.lng().toFixed(6),
+          suburb: results[0].address_components[2].short_name,
+          state: results[0].address_components[4].short_name,
+          postcode: results[0].address_components[6].short_name
         })
       } else {
         alert('Geocode was not successful for the following reason: ' + status);
@@ -88,14 +92,14 @@ class PinForm extends React.Component {
 
   handleMultipleSelect = (event) => {
     this.setState({
-      [event.target.name]: [...event.target.options].filter(options => options.selected).map(options => options  .value)
+      [event.target.name]: [...event.target.options].filter(options => options.selected).map(options => options.value)
     });
   }
   handleSubmit = (event) => {
     event.preventDefault()
     let form_data = new FormData()
 
-    let data_fields = ['description', 'formatted_address', 'lat', 'lng']
+    let data_fields = ['description', 'formatted_address', 'lat', 'lng', 'suburb', 'state', 'postcode']
     for (const key of data_fields){
       form_data.append(key, this.state[key])
     }

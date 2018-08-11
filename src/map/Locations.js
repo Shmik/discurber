@@ -104,7 +104,7 @@ class Locations extends Component {
         <div className='app_layout'>
           <div className='nav_bar__outer'>
             <div className='nav_bar__inner'>
-             <img src='/Logo.png' />
+             <img src='/Logo.png' alt='Discurber'/>
             </div>
           </div>
             <div className='left_outer'>
