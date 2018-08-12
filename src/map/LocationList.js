@@ -4,6 +4,7 @@ import SlideShow from './SlideShow';
 import Categories from './Categories';
 import ShortAddress from './ShortAddress';
 import Description from './Description';
+import TimeDifference from './TimeDifference';
 
 const LocationList = (props) =>
 <div className='location_list'>
@@ -14,7 +15,7 @@ const LocationList = (props) =>
                     <SlideShow pictures={pin.pictures}/>
                     <Categories categories={pin.categories}/>
                     <Description description={pin.description} />
-                    <ShortAddress suburb={pin.suburb} state={pin.state} postcode={pin.postcode} />
+                    <TimeDifference timeDifference={pin.time_since_created} />
                 </div>
             </div>
         )}
