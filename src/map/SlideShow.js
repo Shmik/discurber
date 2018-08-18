@@ -46,7 +46,7 @@ class SlideShow extends React.Component {
 
   render() {
     return (
-      <div className='slider'>
+      <div className={'slider ' + ( this.props.outerClass || "")}>
         {this.renderImage()}
       </div>
     );

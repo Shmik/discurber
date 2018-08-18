@@ -1,0 +1,9 @@
+.pin_detail{
+    height: 800px;
+    width: 80%;
+    padding-left: 10%;
+}
+.slider__pin_detail{
+    height: 50%;
+    border-bottom:  1px solid #cccccc
+  }

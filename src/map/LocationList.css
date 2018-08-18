@@ -31,3 +31,8 @@
     padding-left: 0%;
     max-width: 100%;
 }
+
+.slider__location_list{
+  height: 50%;
+  border-bottom:  1px solid #cccccc
+}
