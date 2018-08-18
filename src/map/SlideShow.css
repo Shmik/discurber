@@ -22,8 +22,8 @@
 .slider img {
   height: 100%;
   width: 100%;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 /* Position the "next button" to the right */
 .next {

@@ -1,7 +1,7 @@
 .action-buttons {
     position: fixed;
     top: 10px;
-    left: 70%;
+    right: 1%;
     width: 500px;
     z-index: 4;
 }
