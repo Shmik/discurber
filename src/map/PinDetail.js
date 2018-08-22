@@ -1,6 +1,5 @@
 import React from 'react';
 import CategoriesDetail from './CategoriesDetail';
-import Description from './Description';
 import SlideShow from './SlideShow'
 import TimeDetail from './TimeDetail'
 import './PinDetail.css'
@@ -14,7 +13,7 @@ const PinDetail = ({toggleShowDetail, pin}) => {
                 <TimeDetail timeDifference={pin.time_since_created} />
                 <CategoriesDetail categories={pin.categories}/>
                 <div className='address_detail'>
-                    <i class="fa fa-map-marker" aria-hidden="true"></i> {pin.formatted_address}
+                    <i className="fa fa-map-marker" aria-hidden="true"></i> {pin.formatted_address}
                 </div>
                 <div className='description_detail'>
                     {pin.description}

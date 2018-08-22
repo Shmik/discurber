@@ -2,7 +2,6 @@ import React from 'react';
 import './LocationList.css'
 import SlideShow from './SlideShow';
 import Categories from './Categories';
-import ShortAddress from './ShortAddress';
 import Description from './Description';
 import TimeDifference from './TimeDifference';
 
