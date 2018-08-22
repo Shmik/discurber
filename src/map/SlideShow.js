@@ -8,12 +8,14 @@ class SlideShow extends React.Component {
     this.scrollLeft = this.scrollLeft.bind(this);
     this.scrollRight = this.scrollRight.bind(this);
   }
-  scrollLeft() {
+  scrollLeft(e) {
+    e.stopPropagation()
     this.setState(prevState=>({
       currentPic: mod(prevState.currentPic -1,   this.props.pictures.length)
     }));
   }
-  scrollRight() {
+  scrollRight(e) {
+    e.stopPropagation()
     this.setState(prevState=>({
       currentPic: mod(prevState.currentPic + 1,   this.props.pictures.length)
     }));
@@ -46,7 +48,7 @@ class SlideShow extends React.Component {
 
   render() {
     return (
-      <div className='slider'>
+      <div className={'slider ' + ( this.props.outerClass || "")}>
         {this.renderImage()}
       </div>
     );

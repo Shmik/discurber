@@ -5,19 +5,9 @@ import PinForm from './PinForm';
 import Filters from './Filters'
 import './Locations.css'
 import axios from 'axios';
+import PinDetail from './PinDetail';
 
 class Locations extends Component {
-  state = {
-    showMap: true,
-    showLocationList: true,
-    showForm: false,
-    locations: [],
-    newPin: {exists: false},
-    center: { lat: -33.858669, lng: 151.204593 },
-    activePin: '',
-    filterString: '',
-    geocoder: null
-  }
 
   green_icon='http://maps.google.com/mapfiles/ms/icons/green-dot.png'
 
@@ -30,6 +20,20 @@ class Locations extends Component {
     this.handleMouseLeave = this.handleMouseLeave.bind(this)
     this.fetchData = this.fetchData.bind(this)
     this.setFilters = this.setFilters.bind(this)
+    this.state = {
+      showMap: true,
+      showLocationList: true,
+      showForm: false,
+      showFilters: true,
+      showDetail: true,
+      locations: [],
+      newPin: {exists: false},
+      center: { lat: -33.858669, lng: 151.204593 },
+      activePin: '',
+      detailPin: '',
+      filterString: '',
+      geocoder: null
+    }
   }
 
   fetchData() {
@@ -57,11 +61,14 @@ class Locations extends Component {
           clearInterval(map_getter);
         }
       }, 100)
-      this.fetchData()
+    this.fetchData()
+  }
+  handleOnClick = (e) => {
+    this.setPinDetail(e.currentTarget.id)
   }
   handleMouseEnter(e) {
     this.setState({
-      activePin: e.currentTarget.id
+      activePin: parseInt(e.currentTarget.id)
     })
   }
   handleMouseLeave() {
@@ -94,6 +101,19 @@ class Locations extends Component {
   clearNewPin(){
     this.setState({newPin: {exists: false, lat: '', lng: ''}})
   }
+
+  setPinDetail = (id) =>{
+    const intId = parseInt(id);
+    const detailPin = this.state.locations.filter((pin) => (pin.id === intId))
+    if (detailPin.length > 0) {
+      this.setState({
+        activePin: intId,
+        detailPin: detailPin[0]
+      })
+    }
+    this.toggleShowDetail(true)
+  }
+
   setFilters(filters){
     this.setState({
       filters: filters
@@ -105,6 +125,24 @@ class Locations extends Component {
     this.setState(prevState => ({
       [name]: !prevState[name]
     }));
+  }
+  toggleShowDetail = (TurnOn) => {
+    if (TurnOn){
+      this.setState({
+        showDetail: true,
+        showFilters: false,
+        showForm: false,
+        showLocationList: false,
+      });
+    } else {
+      this.setState({
+        activePin: '',
+        showDetail: false,
+        showForm: false,
+        showLocationList: true,
+        showFilters: true,
+      });
+    }
   }
 
   toggleShowForm = (TurnOn) => {
@@ -131,17 +169,27 @@ class Locations extends Component {
             </div>
           </div>
             <div className='left_outer'>
+            {this.state.showDetail &&
+              <PinDetail
+                pin={this.state.detailPin}
+                toggleShowDetail={this.toggleShowDetail} />
+            }
+
+            {this.state.showFilters &&
             <Filters
               geocoder = {this.state.geocoder}
               setFilters={this.setFilters}
               setNewCenter={this.setNewCenter}
             />
+            }
             {
               this.state.showLocationList &&
               <LocationList
               pinLocations={this.state.locations}
               handleMouseEnter={this.handleMouseEnter}
-              handleMouseLeave={this.handleMouseLeave} />
+              handleMouseLeave={this.handleMouseLeave}
+              handleOnClick={this.handleOnClick}
+              />
             }
             <PinForm
             handleGeocodeSearch = {this.handleGeocodeSearch}
@@ -158,6 +206,7 @@ class Locations extends Component {
           <div className="map_outer">
           <div className="map_inner">
           <Map
+          setPinDetail = {this.setPinDetail}
           center = {this.state.center}
           newPin = {this.state.newPin}
           activePin = {this.state.activePin}
