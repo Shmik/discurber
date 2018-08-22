@@ -1,18 +1,25 @@
 import React from 'react';
-import Categories from './Categories';
+import CategoriesDetail from './CategoriesDetail';
 import Description from './Description';
 import SlideShow from './SlideShow'
-import TimeDifference from './TimeDifference'
+import TimeDetail from './TimeDetail'
 import './PinDetail.css'
-const PinDetail = ({pin}) => {
+const PinDetail = ({toggleShowDetail, pin}) => {
     if (pin){
       return (
-          <div className='pin_detail'>
+          <div className='pin_detail__outer'>
+            <i className='fa fa-times fa-5x close_detail' onClick={() => toggleShowDetail(false)} />
+            <div className='pin_detail__inner'>
                 <SlideShow outerClass='slider__pin_detail' pictures={pin.pictures}/>
-                <Categories categories={pin.categories}/>
-                <Description description={pin.formatted_address} />
-                <Description description={pin.description} />
-                <TimeDifference timeDifference={pin.time_since_created} />
+                <TimeDetail timeDifference={pin.time_since_created} />
+                <CategoriesDetail categories={pin.categories}/>
+                <div className='address_detail'>
+                    <i class="fa fa-map-marker" aria-hidden="true"></i> {pin.formatted_address}
+                </div>
+                <div className='description_detail'>
+                    {pin.description}
+                </div>
+            </div>
           </div>
       );
     }

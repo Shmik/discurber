@@ -66,10 +66,9 @@ class Locations extends Component {
   handleOnClick = (e) => {
     this.setPinDetail(e.currentTarget.id)
   }
-
   handleMouseEnter(e) {
     this.setState({
-      activePin: e.currentTarget.id
+      activePin: parseInt(e.currentTarget.id)
     })
   }
   handleMouseLeave() {
@@ -107,7 +106,10 @@ class Locations extends Component {
     const intId = parseInt(id);
     const detailPin = this.state.locations.filter((pin) => (pin.id === intId))
     if (detailPin.length > 0) {
-      this.setState({detailPin: detailPin[0]})
+      this.setState({
+        activePin: intId,
+        detailPin: detailPin[0]
+      })
     }
     this.toggleShowDetail(true)
   }
@@ -134,6 +136,7 @@ class Locations extends Component {
       });
     } else {
       this.setState({
+        activePin: '',
         showDetail: false,
         showForm: false,
         showLocationList: true,
@@ -167,7 +170,9 @@ class Locations extends Component {
           </div>
             <div className='left_outer'>
             {this.state.showDetail &&
-              <PinDetail pin={this.state.detailPin} />
+              <PinDetail
+                pin={this.state.detailPin}
+                toggleShowDetail={this.toggleShowDetail} />
             }
 
             {this.state.showFilters &&
@@ -201,6 +206,7 @@ class Locations extends Component {
           <div className="map_outer">
           <div className="map_inner">
           <Map
+          setPinDetail = {this.setPinDetail}
           center = {this.state.center}
           newPin = {this.state.newPin}
           activePin = {this.state.activePin}

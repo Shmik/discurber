@@ -12,13 +12,13 @@
   font-size: 18px;
   background-color: white;
 }
-.img_wrapper{
-  height: 100%;
-  width: 100%;
-}
 
 .slider{
   position: relative;
+}
+.img_wrapper{
+  height: 100%;
+  width: 100%;
 }
 
 .slider img {

@@ -1,9 +1,29 @@
-.pin_detail{
+.pin_detail__outer{
+    background-color: white;
+    display: block;
+}
+.pin_detail__inner{
+    padding-top: 75px;
     height: 800px;
     width: 80%;
     padding-left: 10%;
+    display: block;
 }
 .slider__pin_detail{
     height: 50%;
-    border-bottom:  1px solid #cccccc
   }
+
+.close_detail{
+    float: right;
+}
+.address_detail{
+    font-size: 20px;
+    margin-top: 30px;
+}
+.fa-map-marker{
+    color: #41b3e4;
+}
+.description_detail{
+    margin-top: 24px;
+    font-size: 20px;
+}
