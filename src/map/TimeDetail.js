@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import './TimeDetail.css'
+import './TimeDetail.css';
 
 const TimeDetail = (props) => {
   return (
@@ -8,6 +9,10 @@ const TimeDetail = (props) => {
       Listed {props.timeDifference} ago
     </div>
   );
-}
+};
+
+TimeDetail.propTypes = {
+  timeDifference: PropTypes.string
+};
 
 export default TimeDetail;

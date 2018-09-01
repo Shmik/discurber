@@ -1,62 +1,68 @@
-import React from "react";
-import './SlideShow.css'
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import './SlideShow.css';
 
 class SlideShow extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
-    this.state = {currentPic: 0};
+    this.state = { currentPic: 0 };
     this.scrollLeft = this.scrollLeft.bind(this);
     this.scrollRight = this.scrollRight.bind(this);
   }
-  scrollLeft(e) {
-    e.stopPropagation()
-    this.setState(prevState=>({
-      currentPic: mod(prevState.currentPic -1,   this.props.pictures.length)
+  scrollLeft (e) {
+    e.stopPropagation();
+    this.setState(prevState => ({
+      currentPic: mod(prevState.currentPic - 1, this.props.pictures.length)
     }));
   }
-  scrollRight(e) {
-    e.stopPropagation()
-    this.setState(prevState=>({
-      currentPic: mod(prevState.currentPic + 1,   this.props.pictures.length)
+  scrollRight (e) {
+    e.stopPropagation();
+    this.setState(prevState => ({
+      currentPic: mod(prevState.currentPic + 1, this.props.pictures.length)
     }));
   }
-
 
   renderSlide = () =>
     <div className='img_wrapper'>
       <span className='prev' onClick={this.scrollLeft}>&#10094;</span>
-        <img src={this.props.pictures[this.state.currentPic]}  alt="alternative" />
-       <span className='next' onClick={this.scrollRight}>&#10095;</span>
+      <img src={this.props.pictures[this.state.currentPic]} alt="alternative" />
+      <span className='next' onClick={this.scrollRight}>&#10095;</span>
     </div>
 
   renderSingleImage = () => <div className='img_wrapper'>
-                              <img src={this.props.pictures[this.state.currentPic]}  alt="alternative" />
-                            </div>
+    <img src={this.props.pictures[this.state.currentPic]} alt="alternative" />
+  </div>
 
   renderPlaceHolder = () => <div className='img_wrapper'>
-                              <img src='/placeholder.jpg'  alt="alternative" />
-                            </div>
+    <img src='/placeholder.jpg' alt="alternative" />
+  </div>
 
   renderImage = () => {
     if (this.props.pictures.length === 0) {
-      return this.renderPlaceHolder()
+      return this.renderPlaceHolder();
     } else if (this.props.pictures.length === 1) {
-      return this.renderSingleImage()
+      return this.renderSingleImage();
     }
-    return this.renderSlide()
+    return this.renderSlide();
   }
 
-  render() {
+  render () {
     return (
-      <div className={'slider ' + ( this.props.outerClass || "")}>
+      <div className={'slider ' + (this.props.outerClass || '')}>
         {this.renderImage()}
       </div>
     );
   }
 }
 
-function mod(n, m) {
-    return ((n % m) + m) % m;
-  }
+SlideShow.propTypes = {
+  pictures: PropTypes.array,
+  outerClass: PropTypes.string
+};
 
-export default SlideShow
+function mod (n, m) {
+  return ((n % m) + m) % m;
+}
+
+export default SlideShow;

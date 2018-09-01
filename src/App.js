@@ -3,9 +3,9 @@ import './App.css';
 import Locations from './map/Locations';
 
 class App extends Component {
-  render() {
+  render () {
     return (
-     <Locations />
+      <Locations />
     );
   }
 }
