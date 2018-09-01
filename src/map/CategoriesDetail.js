@@ -1,11 +1,18 @@
 import React from 'react';
-import './CategoriesDetail.css'
-const Categories = (props) => {
-    return (
-        <div className='categoriesList__detail'>
-            {props.categories.map((category, index)=> <div key={index} className='categoryItem__detail'> {category} </div>)}
-        </div>
-    );
-}
+import PropTypes from 'prop-types';
 
-export default Categories;
+import './CategoriesDetail.css';
+
+const CategoriesDetail = (props) => {
+  return (
+    <div className='categoriesList__detail'>
+      {props.categories.map((category, index) => <div key={index} className='categoryItem__detail'> {category} </div>)}
+    </div>
+  );
+};
+
+CategoriesDetail.propTypes = {
+  categories: PropTypes.object
+};
+
+export default CategoriesDetail;

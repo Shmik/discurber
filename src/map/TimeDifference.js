@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import './TimeDifference.css'
+import './TimeDifference.css';
 
 const TimeDifference = (props) => {
   return (
@@ -8,6 +9,10 @@ const TimeDifference = (props) => {
       {props.timeDifference}
     </div>
   );
-}
+};
+
+TimeDifference.propTypes = {
+  timeDifference: PropTypes.string
+};
 
 export default TimeDifference;
