@@ -12,7 +12,7 @@ const Categories = (props) => {
 };
 
 Categories.propTypes = {
-  categories: PropTypes.object
+  categories: PropTypes.array
 };
 
 export default Categories;

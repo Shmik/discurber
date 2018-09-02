@@ -12,7 +12,7 @@ const CategoriesDetail = (props) => {
 };
 
 CategoriesDetail.propTypes = {
-  categories: PropTypes.object
+  categories: PropTypes.array
 };
 
 export default CategoriesDetail;

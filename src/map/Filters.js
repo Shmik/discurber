@@ -72,7 +72,7 @@ class Filters extends Component {
 
 Filters.propTypes = {
   setFilters: PropTypes.func,
-  geocoder: PropTypes.func,
+  geocoder: PropTypes.object,
   setNewCenter: PropTypes.func
 };
 

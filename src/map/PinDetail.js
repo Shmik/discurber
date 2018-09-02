@@ -29,7 +29,10 @@ const PinDetail = ({ toggleShowDetail, pin }) => {
 
 PinDetail.propTypes = {
   toggleShowDetail: PropTypes.func,
-  pin: PropTypes.object
+  pin: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
 };
 
 export default PinDetail;

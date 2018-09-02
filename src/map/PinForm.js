@@ -161,7 +161,7 @@ PinForm.propTypes = {
   setNewPin: PropTypes.func,
   clearNewPin: PropTypes.func,
   handleGeocodeSearch: PropTypes.func,
-  showForm: PropTypes.func,
+  showForm: PropTypes.bool,
 };
 
 export default PinForm;
