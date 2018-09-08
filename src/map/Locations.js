@@ -210,14 +210,13 @@ class Locations extends Component {
                   pinLocations={this.state.locations}
                   googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAuujf3qwBlQG1WIbQNqGbpjJdgjKFdx4"
                   loadingElement={<div style={{ height: '100%' }} />}
-                  containerElement={<div style={{ height: '800px', width: '40%' }} />}
+                  containerElement={<div className='map_container' />}
                   mapElement={<div style={{ height: '100%' }} />}
-                /></div></div>}
-
+                />
+              </div>
+            </div>}
+          <button name='showMap' className='show_map_button' onClick={this.handleToggle}>Toggle Map</button>
         </div>
-        <button name='showMap' style={{ float: 'right' }} onClick={this.handleToggle}>Toggle Map</button>
-        <button name='showLocationList' style={{ float: 'right' }} onClick={this.handleToggle}>Toggle LocationList</button>
-        <button name='showForm' style={{ float: 'right' }} onClick={this.handleToggle}>Toggle Form</button>
       </div>
     );
   }

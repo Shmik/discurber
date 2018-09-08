@@ -1,6 +1,7 @@
 .filters__outer{
     background-color: #F2F2F2;
     margin-top: 20px;
+    grid-area: 'filters';
 }
 .filters__inner{
     height: 30px;
@@ -37,3 +38,13 @@ button{
 ::-ms-input-placeholder { /* Microsoft Edge */
     color: black;
 }
+
+@media only screen and (max-width: 600px)  {
+    .filters__inner {
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+        margin-left: 50px;
+        margin-right: 50px;
+        height: 100%;
+    }
+  }

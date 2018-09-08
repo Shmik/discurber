@@ -7,18 +7,23 @@ input{
 .app_layout{
     display: grid;
     grid-template-rows: 70px auto;
-    grid-template-columns: 60% auto;
+    grid-template-columns: 6fr 4fr;
+}
+.map_outer{
+    height: 100%;
 }
 .map_inner{
     position: fixed;
     width: 100%;
+    height: 90%;
+    grid-area: map;
 }
-.nav_bar__outer          {
+.nav_bar__outer{
     grid-column-start: 1;
     grid-column-end: 3;
     height: 100%;
     z-index: 2;
-}
+    }
 
 .nav_bar__inner{
     max-height:70px;
@@ -36,4 +41,31 @@ input{
 }
 .left_outer{
     background-color: #F2F2F2;
+}
+.map_container{
+    height: 100%;
+    width: 40%;
+}
+
+
+.show_map_button{
+    display: none;
+}
+@media only screen and (max-width: 600px)  {
+    .app_layout{
+        grid-template-columns: 1fr;
+    }
+    .map_outer{
+        position: fixed;
+    }
+    .map_container{
+        width: 100%;
+    }
+    .show_map_button{
+        position: fixed;
+        bottom: 0;
+        height: 10%;
+        width: 100%;
+        display: inline;
+    }
 }

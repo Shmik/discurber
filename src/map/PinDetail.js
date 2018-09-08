@@ -24,7 +24,7 @@ const PinDetail = ({ toggleShowDetail, pin }) => {
       </div>
     );
   }
-  return (<div>No detail pin</div>);
+  return (<div></div>);
 };
 
 PinDetail.propTypes = {
