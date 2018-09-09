@@ -22,6 +22,7 @@ class PinForm extends React.Component {
     this.handleGeocodeNewPin = this.handleGeocodeNewPin.bind(this);
     this.displayNewPin = this.displayNewPin.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.showForm = this.showForm.bind(this);
   }
 
   handleGeocodeNewPin (event) {
@@ -29,7 +30,9 @@ class PinForm extends React.Component {
     this.props.geocoder.geocode({ 'address': address }, this.displayNewPin);
     this.props.toggleShowForm(true);
   }
-
+  showForm(){
+    this.props.toggleShowForm(true);
+  }
   displayNewPin (results, status) {
     if (status === 'OK') {
       this.props.setNewPin(results[0].geometry.location);
@@ -109,41 +112,48 @@ class PinForm extends React.Component {
       <div>
         {this.props.showForm &&
           <form className='pin_form' onSubmit={this.handleSubmit}>
-            <i className='fa fa-times close' onClick={() => this.props.toggleShowForm(false)} />
-            <label> {this.state.formatted_address} </label>
-            <label> Pin Description </label>
-            <input
-              name="description"
-              type="text"
-              onChange={this.handleInputChange} />
-            <input
-              name="pictures"
-              id='pictures'
-              type="file"
-              ref={ref => { this.fileInput = ref; }}
-              onChange={this.handlePictureUpload} />
-            <label> Categories </label>
-            <select multiple name='categories' value={this.state.categories} onChange={this.handleMultipleSelect}>
-              <option value='Chairs'>Chairs</option>
-              <option value='Tables'>Tables</option>
-              <option value='Tools'>Tools</option>
-              <option value='Games'>Games</option>
-              <option value='Kitchen'>Kitchen</option>
-              <option value='Electronics'>Electronics</option>
-            </select>
-            <br />
-            <button type='button' onClick={() => this.fileInput.click()}> Add pictures </button>
-            <ul>{this.state.pictures.map((file, index) => <li key={index}>{file.name}</li>)}</ul>
-            <input type='submit' id='submit' value='Submit' />
+            <div className='x' onClick={() => this.props.toggleShowForm(false)} />
+            <div className='pin_form__inner'>
+              <label>Address</label>
+              <div className='address_input'>
+                <input
+                  name='address'
+                  type="text"
+                  onChange={this.handleInputChange} />
+                <button onClick={this.handleGeocodeNewPin}>Locate</button>
+              </div>
+              <label> {this.state.formatted_address} </label>
+              <label> Categories </label>
+              <select multiple name='categories' size='6' value={this.state.categories} onChange={this.handleMultipleSelect}>
+                <option value='Chairs'>Chairs</option>
+                <option value='Tables'>Tables</option>
+                <option value='Tools'>Tools</option>
+                <option value='Games'>Games</option>
+                <option value='Kitchen'>Kitchen</option>
+                <option value='Electronics'>Electronics</option>
+              </select>
+              <br />
+              <label>Description</label>
+              <input
+                name="description"
+                type="text"
+                onChange={this.handleInputChange} />
+              <input
+                name="pictures"
+                id='pictures'
+                type="file"
+                ref={ref => { this.fileInput = ref; }}
+                onChange={this.handlePictureUpload} />
+              <button type='button' onClick={() => this.fileInput.click()}> Add pictures </button>
+              <ul>{this.state.pictures.map((file, index) => <li key={index}>{file.name}</li>)}</ul>
+              <input type='submit' id='submit' value='GO!' />
+            </div>
           </form>
         }
         <div className="action-buttons">
-          <SlidingInput
-            fa_icon='plus-square'
-            value={this.state.parsedAddress}
-            onChange={this.handleInputChange}
-            handleEnter={this.handleGeocodeNewPin}
-            name='address' />
+          <div className='action_item' onClick={this.showForm}>
+            <i className='fa fa-3x fa-plus-square'></i>
+          </div>
           <SlidingInput
             fa_icon='search'
             onChange={this.handleInputChange}
