@@ -5,7 +5,9 @@
     width: 500px;
     z-index: 4;
 }
-
+.action_item{
+    float: right;
+}
 .pin_form input[type=text]{
     width: 100%;
     padding: 12px 20px;
@@ -13,22 +15,27 @@
     box-sizing: border-box;
     background: transparent;
 }
-.pin_form input, label{
+.pin_form label{
     display: block;
-    margin-bottom: 10px;
+    margin-top: 10px;
 }
 .pin_form input[type=file]{
     display: none;
 }
 .pin_form{
-    margin-top: 50px;
+    background-color: white;
     margin-left: auto;
     margin-right: auto;
-    width: 30%;
-    font-family: Georgia, "Times New Roman", Times, serif;
+    margin-top: 50px;
+    width: 70%;
     background: f2f2f2;
-    padding: 30px 30px 15px 30px;
-    border: 5px solid #53687E;
+    padding-bottom: 1px;
+}
+.pin_form__inner{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .pin_form input[type=text]:focus,
@@ -36,19 +43,45 @@
     border-bottom: 1px dashed black;
 }
 
-.pin_form button {
-    background: #576E86;
-    border: none;
-    padding: 8px 10px 8px 10px;
-    border-radius: 5px;
-    color: #A8BACE;
+.pin_form button{
+    background-color: lightgray;
+    margin-top: 10px;
+    border: 0px;
+    color: white;
+    padding: 12px 20px;
 }
+
 .pin_form input[type=submit]{
-    background: #576E86;
-    border: none;
-    padding: 8px 10px 8px 10px;
-    border-radius: 5px;
-    color: #A8BACE;
+    background-color: #29ABE2;
+    border: 0px;
+    color: white;
+    padding: 12px 20px;
+    width: 100%;
+}
+
+.pin_form select{
+    margin: 10px 0px;
+    width: 100%
+}
+.address_input{
+    display: grid;
+    grid-template-columns: 1fr 200px;
+}
+@media only screen and (max-width: 600px)  {
+    .pin_form{
+        width: 100%;
+    }
+    .address_input{
+        grid-template-columns: 1fr;
+    }
+    .address_input button {
+        margin-left: 0px !important;
+    }
+}
+
+.address_input button {
+    margin: 8px 0;
+    margin-left: 10px;
 }
 .close{
     float: right;

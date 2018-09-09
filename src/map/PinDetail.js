@@ -9,7 +9,7 @@ const PinDetail = ({ toggleShowDetail, pin }) => {
   if (pin) {
     return (
       <div className='pin_detail__outer'>
-        <i className='fa fa-times fa-5x close_detail' onClick={() => toggleShowDetail(false)} />
+        <div className='x x_double' onClick={() => toggleShowDetail(false)} />
         <div className='pin_detail__inner'>
           <SlideShow outerClass='slider__pin_detail' pictures={pin.pictures} />
           <TimeDetail timeDifference={pin.time_since_created} />

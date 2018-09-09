@@ -154,11 +154,14 @@ class Locations extends Component {
     if (TurnOn) {
       this.setState({
         showForm: true,
+        showDetail: false,
+        showFilters: false,
         showLocationList: false,
       });
     } else {
       this.setState({
         showForm: false,
+        showFilters: true,
         showLocationList: true,
       });
     }
@@ -179,7 +182,6 @@ class Locations extends Component {
                 pin={this.state.detailPin}
                 toggleShowDetail={this.toggleShowDetail} />
             }
-
             {this.state.showFilters &&
               <Filters
                 geocoder={this.state.geocoder}
@@ -223,7 +225,7 @@ class Locations extends Component {
                 />
               </div>
             </div>}
-          <button name='showMap' className='show_map_button' onClick={this.handleToggle}>Toggle Map</button>
+          <button name='showMap' className='show_map_button' onClick={this.handleToggle}>{this.state.showMap? 'Hide map' : 'Show map '}</button>
         </div>
       </div>
     );
