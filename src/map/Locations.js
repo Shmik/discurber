@@ -10,6 +10,7 @@ import PinDetail from './PinDetail';
 class Locations extends Component {
   constructor (props) {
     super(props);
+    this.is_mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
     this.setNewPin = this.setNewPin.bind(this);
     this.clearNewPin = this.clearNewPin.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
@@ -107,6 +108,13 @@ class Locations extends Component {
         activePin: intId,
         detailPin: detailPin[0]
       });
+      if (this.is_mobile) {
+        let pinLocation = {
+          lat: () => detailPin[0].lat,
+          lng: () => detailPin[0].lng
+        };
+        this.setNewCenter(pinLocation);
+      }
     }
     this.toggleShowDetail(true);
   }
@@ -210,14 +218,13 @@ class Locations extends Component {
                   pinLocations={this.state.locations}
                   googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAuujf3qwBlQG1WIbQNqGbpjJdgjKFdx4"
                   loadingElement={<div style={{ height: '100%' }} />}
-                  containerElement={<div style={{ height: '800px', width: '40%' }} />}
+                  containerElement={<div className='map_container' />}
                   mapElement={<div style={{ height: '100%' }} />}
-                /></div></div>}
-
+                />
+              </div>
+            </div>}
+          <button name='showMap' className='show_map_button' onClick={this.handleToggle}>Toggle Map</button>
         </div>
-        <button name='showMap' style={{ float: 'right' }} onClick={this.handleToggle}>Toggle Map</button>
-        <button name='showLocationList' style={{ float: 'right' }} onClick={this.handleToggle}>Toggle LocationList</button>
-        <button name='showForm' style={{ float: 'right' }} onClick={this.handleToggle}>Toggle Form</button>
       </div>
     );
   }
