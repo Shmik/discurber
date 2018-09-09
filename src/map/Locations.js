@@ -168,6 +168,8 @@ class Locations extends Component {
   }
 
   render () {
+    const mapOuter = this.state.showMap ? 'map_outer': 'map_outer hidden';
+
     return (
       <div>
         <div className='app_layout'>
@@ -210,7 +212,7 @@ class Locations extends Component {
             />
           </div>
           {this.state.showMap &&
-            <div className="map_outer">
+            <div className={mapOuter}>
               <div className="map_inner">
                 <Map
                   setPinDetail={this.setPinDetail}

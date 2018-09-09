@@ -103,3 +103,7 @@ input{
     height: 32px;
     padding-top: 32px;
 }
+
+.hidden{
+    display: none;
+}

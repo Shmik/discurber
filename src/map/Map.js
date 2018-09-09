@@ -4,6 +4,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-map
 const Map = withScriptjs(withGoogleMap((props) =>
   <GoogleMap
     center={props.center}
+    clickableIcons={false}
     defaultZoom={13}
   >
     {props.pinLocations.map(pin => <Marker key={pin.id}
