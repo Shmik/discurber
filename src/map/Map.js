@@ -8,8 +8,8 @@ const Map = withScriptjs(withGoogleMap((props) =>
   >
     {props.pinLocations.map(pin => <Marker key={pin.id}
       icon={(pin.id === props.activePin)
-        ? 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
-        : 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+        ? 'green-dot.png'
+        : 'blue-dot.png'
       }
       onClick={() => { props.setPinDetail(pin.id); }}
       shape={
