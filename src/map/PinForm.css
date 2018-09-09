@@ -45,6 +45,7 @@
 
 .pin_form button{
     background-color: lightgray;
+    margin-top: 10px;
     border: 0px;
     color: white;
     padding: 12px 20px;
@@ -59,12 +60,23 @@
 }
 
 .pin_form select{
-    margin-top: 10px;
-   width: 100%
+    margin: 10px 0px;
+    width: 100%
 }
 .address_input{
     display: grid;
     grid-template-columns: 1fr 200px;
+}
+@media only screen and (max-width: 600px)  {
+    .pin_form{
+        width: 100%;
+    }
+    .address_input{
+        grid-template-columns: 1fr;
+    }
+    .address_input button {
+        margin-left: 0px !important;
+    }
 }
 
 .address_input button {
