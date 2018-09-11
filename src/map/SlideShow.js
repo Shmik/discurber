@@ -9,6 +9,18 @@ class SlideShow extends React.Component {
     this.state = { currentPic: 0 };
     this.scrollLeft = this.scrollLeft.bind(this);
     this.scrollRight = this.scrollRight.bind(this);
+    this.preloadImages = this.preloadImages.bind(this);
+  }
+  componentDidMount () {
+    this.preloadImages();
+  }
+  preloadImages () {
+    this.props.pictures.forEach((picture, index) => {
+      if (index > 0) {
+        const img = new Image();
+        img.src = picture;
+      }
+    });
   }
   scrollLeft (e) {
     e.stopPropagation();
