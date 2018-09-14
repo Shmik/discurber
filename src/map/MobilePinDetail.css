@@ -1,0 +1,32 @@
+.mobile_detail__outer{
+    background-color: white;
+    display: block;
+    position: fixed;
+    z-index: 4;
+    bottom: 70px;
+    height: 40%;
+    width: 100%;
+}
+.mobile_detail__inner{
+    display: block;
+    margin-top: 30px;
+    height: 100%;
+}
+.slider__mobile_detail{
+    height: 50%;
+  }
+
+.close_detail{
+    float: right;
+}
+.address_detail{
+    font-size: 20px;
+    margin-top: 30px;
+}
+.fa-map-marker{
+    color: #41b3e4;
+}
+.description_detail{
+    margin-top: 24px;
+    font-size: 20px;
+}

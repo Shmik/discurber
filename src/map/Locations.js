@@ -6,6 +6,7 @@ import Filters from './Filters';
 import './Locations.css';
 import axios from 'axios';
 import PinDetail from './PinDetail';
+import MobilePinDetail from './MobilePinDetail';
 
 class Locations extends Component {
   constructor (props) {
@@ -149,7 +150,17 @@ class Locations extends Component {
       });
     }
   }
-
+  toggleShowMap = (TurnOn) => {
+    if (TurnOn) {
+      this.setState({
+        showMap: true,
+      });
+    } else {
+      this.setState({
+        showMap: false,
+      });
+    }
+  }
   toggleShowForm = (TurnOn) => {
     if (TurnOn) {
       this.setState({
@@ -167,6 +178,7 @@ class Locations extends Component {
     }
   }
 
+
   render () {
     const mapOuter = this.state.showMap ? 'map_outer': 'map_outer hidden';
 
@@ -180,9 +192,9 @@ class Locations extends Component {
           </div>
           <div className='left_outer'>
             {this.state.showDetail &&
-              <PinDetail
-                pin={this.state.detailPin}
-                toggleShowDetail={this.toggleShowDetail} />
+                <PinDetail
+                  pin={this.state.detailPin}
+                  toggleShowDetail={this.toggleShowDetail} />
             }
             {this.state.showFilters &&
               <Filters
@@ -211,22 +223,28 @@ class Locations extends Component {
               clearNewPin={this.clearNewPin}
             />
           </div>
-          {this.state.showMap &&
-            <div className={mapOuter}>
-              <div className="map_inner">
-                <Map
-                  setPinDetail={this.setPinDetail}
-                  center={this.state.center}
-                  newPin={this.state.newPin}
-                  activePin={this.state.activePin}
-                  pinLocations={this.state.locations}
-                  googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAuujf3qwBlQG1WIbQNqGbpjJdgjKFdx4"
-                  loadingElement={<div style={{ height: '100%' }} />}
-                  containerElement={<div className='map_container' />}
-                  mapElement={<div style={{ height: '100%' }} />}
-                />
-              </div>
-            </div>}
+          {this.state.showDetail && this.state.showMap && this.is_mobile &&
+              <MobilePinDetail
+                pin={this.state.detailPin}
+                toggleShowDetail={this.toggleShowDetail}
+                toggleShowMap={this.toggleShowMap}
+              />
+          }
+          <div className={mapOuter}>
+            <div className="map_inner">
+              <Map
+                setPinDetail={this.setPinDetail}
+                center={this.state.center}
+                newPin={this.state.newPin}
+                activePin={this.state.activePin}
+                pinLocations={this.state.locations}
+                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAuujf3qwBlQG1WIbQNqGbpjJdgjKFdx4"
+                loadingElement={<div style={{ height: '100%' }} />}
+                containerElement={<div className='map_container' />}
+                mapElement={<div style={{ height: '100%' }} />}
+              />
+            </div>
+          </div>
           <button name='showMap' className='show_map_button' onClick={this.handleToggle}>{this.state.showMap? 'Hide map' : 'Show map '}</button>
         </div>
       </div>
