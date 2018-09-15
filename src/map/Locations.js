@@ -27,7 +27,7 @@ class Locations extends Component {
       showDetail: true,
       locations: [],
       newPin: { exists: false },
-      center: { lat: -33.858669, lng: 151.204593 },
+      center: { lat: -37.813223, lng: 144.962846 },
       activePin: '',
       detailPin: '',
       filterString: '',
@@ -109,13 +109,11 @@ class Locations extends Component {
         activePin: intId,
         detailPin: detailPin[0]
       });
-      if (this.is_mobile) {
-        let pinLocation = {
-          lat: () => detailPin[0].lat,
-          lng: () => detailPin[0].lng
-        };
-        this.setNewCenter(pinLocation);
-      }
+      let pinLocation = {
+        lat: () => detailPin[0].lat,
+        lng: () => detailPin[0].lng
+      };
+      this.setNewCenter(pinLocation);
     }
     this.toggleShowDetail(true);
   }
