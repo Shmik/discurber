@@ -5,3 +5,4 @@ Discurber is a web app that allows people to:
 - Add descriptions and picture to the pins.
 - View lists and details of other pins that have been created.
 
+See it in action at www.discurber.com
