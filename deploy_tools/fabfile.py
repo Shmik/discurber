@@ -8,6 +8,7 @@ def deploy():
         _get_latest_source()
         _update_virtualenv()
         _update_static_files()
+        _migrate_django()
         _update_js_build()
 
 def _get_latest_source():
@@ -21,7 +22,7 @@ def _update_virtualenv():
 def _update_static_files():
     run('~/.virtualenvs/discurber/bin/python discurber/manage.py collectstatic --noinput')
 
-def _update_static_files():
+def _migrate_django():
     run('~/.virtualenvs/discurber/bin/python discurber/manage.py migrate --noinput')
 
 def _update_js_build():
