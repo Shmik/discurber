@@ -4,12 +4,13 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
-    "eslint": "^5.5.0",
+    "eslint": "^5.15.1",
     "font-awesome": "^4.7.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-google-maps": "^9.4.5",
     "react-lines-ellipsis": "^0.13.2",
+    "react-loading": "^2.0.3",
     "react-scripts": "1.1.4",
     "serve": "^9.4.0"
   },

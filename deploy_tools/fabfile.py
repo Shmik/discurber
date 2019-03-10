@@ -26,4 +26,5 @@ def _migrate_django():
     run('~/.virtualenvs/discurber/bin/python discurber/manage.py migrate --noinput')
 
 def _update_js_build():
+    run('npm install')
     run('npm run build')

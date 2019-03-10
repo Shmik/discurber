@@ -86,3 +86,6 @@
 .close{
     float: right;
 }
+.spinner {
+    margin: 0 auto;
+}

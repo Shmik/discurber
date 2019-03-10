@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import ReactLoading from 'react-loading';
 import axios from 'axios';
 import SlidingInput from './SlidingInput';
 
@@ -15,7 +15,8 @@ class PinForm extends React.Component {
       lat: '',
       lng: '',
       pictures: [],
-      categories: []
+      categories: [],
+      loading: false,
     };
     this.props = props;
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -26,6 +27,7 @@ class PinForm extends React.Component {
   }
 
   handleGeocodeNewPin (event) {
+    event.preventDefault();
     let address = this.state.address;
     this.props.geocoder.geocode({ 'address': address }, this.displayNewPin);
     this.props.toggleShowForm(true);
@@ -75,6 +77,7 @@ class PinForm extends React.Component {
   }
   handleSubmit = (event) => {
     event.preventDefault();
+    this.setState({ loading: true });
     let form = new FormData();
 
     let dataFields = ['description', 'formatted_address', 'lat', 'lng', 'suburb', 'state', 'postcode'];
@@ -87,19 +90,21 @@ class PinForm extends React.Component {
     for (const category of this.state.categories) {
       form.append('categories', category);
     }
-    let self = this;
     axios.post('/api/', form, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     })
       .then((result) => {
-        self.props.fetchData();
+        this.props.fetchData();
         this.props.clearNewPin();
         this.props.toggleShowForm(false);
+        this.setState({ loading: false });
       })
-      .catch(function (error) {
+      .catch((error) => {
+        // TODO: Add validation
         console.log(error);
+        this.setState({ loading: false });
       });
   }
   handlePictureUpload = (event) => {
@@ -146,7 +151,10 @@ class PinForm extends React.Component {
                 onChange={this.handlePictureUpload} />
               <button type='button' onClick={() => this.fileInput.click()}> Add pictures </button>
               <ul>{this.state.pictures.map((file, index) => <li key={index}>{file.name}</li>)}</ul>
-              <input type='submit' id='submit' value='GO!' />
+              {this.state.loading
+                ? <ReactLoading type={'spin'} color={'blue'} className='spinner'/>
+                : <input type='submit' id='submit' value='GO!' />
+              }
             </div>
           </form>
         }
